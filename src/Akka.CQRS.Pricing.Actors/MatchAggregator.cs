@@ -106,7 +106,7 @@ namespace Akka.CQRS.Pricing.Actors
                 _priceUpdates.Enqueue(s.RecentPriceUpdates.ToArray());
 
             if(s.RecentVolumeUpdates != null && s.RecentVolumeUpdates.Count > 0)
-            _volumeUpdates.Enqueue(s.RecentVolumeUpdates.ToArray());
+                _volumeUpdates.Enqueue(s.RecentVolumeUpdates.ToArray());
         }
 
         private MatchAggregatorSnapshot SaveAggregateData()

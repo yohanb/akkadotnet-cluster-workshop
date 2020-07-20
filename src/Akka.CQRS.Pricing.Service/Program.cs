@@ -27,7 +27,7 @@ namespace Akka.CQRS.Pricing.Service
         {
             var config = File.ReadAllText("app.conf");
             var conf = ConfigurationFactory.ParseString(config);
-            /*
+
             var actorSystem = ActorSystem.Create("AkkaTrader", conf.BoostrapApplication(new AppBootstrapConfig(true, true)));
             
             var sharding = ClusterSharding.Get(actorSystem);
@@ -75,7 +75,7 @@ namespace Akka.CQRS.Pricing.Service
             pbm.Start();
 
             actorSystem.WhenTerminated.Wait();
-            */
+
             return 0;
         }
     }

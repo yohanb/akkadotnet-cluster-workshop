@@ -37,8 +37,9 @@ namespace Akka.CQRS.TradePlacers.Service
 
             Cluster.Cluster.Get(actorSystem).RegisterOnMemberUp(() =>
             {
-                var shardRegionProxy = tradeRouter;
-                var subManager = new ActorTradeSubscriptionManager(tradeRouter);
+                var sharding = ClusterSharding.Get(actorSystem);
+                var shardRegionProxy = sharding.StartProxy("orderBook", "trade-processor", new StockShardMsgRouter());
+                var subManager = Subscriptions.DistributedPubSub.DistributedPubSubTradeEventSubscriptionManager.For(actorSystem);
                 foreach (var stock in AvailableTickerSymbols.Symbols)
                 {
                     var max = (decimal)ThreadLocalRandom.Current.Next(20, 45);
